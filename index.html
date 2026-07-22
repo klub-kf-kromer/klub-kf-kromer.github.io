@@ -3,7 +3,7 @@ layout: default
 title: Strona Główna
 ---
 
-<div style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.65) 100%), url('{{ page.hero_image | default: "/assets/images/page-bg.jpg" | relative_url }}') center/cover no-repeat; padding: 3rem 2rem; border-radius: 16px; border: 1px solid var(--border-color); margin-bottom: 3rem; text-align: center;">
+<div style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.65) 100%), url({{ page.hero_image | default: '/assets/images/hero-bg.jpg' | relative_url }}) center/cover no-repeat; padding: 3rem 2rem; border-radius: 16px; border: 1px solid var(--border-color); margin-bottom: 3rem; text-align: center;">
   
   <span style="font-family: 'Fira Code', monospace; color: var(--primary); font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.5);">--.-- --- .-. .-.. .. -.-. .</span>
   
@@ -15,7 +15,6 @@ title: Strona Główna
   
   <a href="{{ '/edukacja/' | relative_url }}" class="btn">Rozpocznij przygodę z radiem &rarr;</a>
 </div>
-
 <h2>Ostatnie Działania i Wpisy</h2>
 
 <div class="grid">
