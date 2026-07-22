@@ -1,9 +1,10 @@
 ---
 layout: default
-title: Strona Główna
+title: "Strona Główna"
+hero_image: /assets/images/hero-bg.jpg
 ---
 
-{% assign bg_image = page.hero_image | default: '/assets/images/hero-bg.jpg' %}
+{% assign bg_image = page.hero_image | default: '/assets/images/page-bg.jpg' %}
 
 <div class="hero-banner-box" style="background-image: url('{{ bg_image | relative_url }}');">
   <span style="font-family: 'Fira Code', monospace; color: var(--primary); font-weight: 600;">--.-- --- .-. .-.. .. -.-. .</span>
