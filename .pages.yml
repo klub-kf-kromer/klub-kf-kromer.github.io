@@ -112,3 +112,25 @@ content:
       - name: body
         label: "Opis szczegółowy"
         type: rich-text
+
+- name: pages
+    label: "Strony statyczne"
+    type: collection
+    path: /
+    files:
+      - name: home
+        label: "Strona Główna"
+        file: index.html
+        fields:
+          - name: title
+            label: "Tytuł strony"
+            type: string
+          - name: hero_image
+            label: "Zdjęcie w tle banera"
+            type: image
+          - name: hero_title
+            label: "Tytuł w banerze"
+            type: string
+          - name: hero_subtitle
+            label: "Opis w banerze"
+            type: string
