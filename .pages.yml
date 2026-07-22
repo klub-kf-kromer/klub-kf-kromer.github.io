@@ -29,9 +29,6 @@ content:
         label: "Autor / Znak"
         type: string
         default: "Klub Krótkofalarski"
-      - name: image
-        label: "Zdjęcie wyróżniające (Okładka)"
-        type: image
       - name: gallery
         label: Gallery
         type: image
