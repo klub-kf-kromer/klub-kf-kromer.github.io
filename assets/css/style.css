@@ -1,0 +1,451 @@
+:root {
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --accent: #10b981;
+  --border-color: #e2e8f0;
+  --wave-color: rgba(37, 99, 235, 0.08);
+}
+
+[data-theme="dark"] {
+  --bg-color: #0b0f19;
+  --card-bg: #151c2c;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --primary: #3b82f6;
+  --primary-hover: #60a5fa;
+  --accent: #34d399;
+  --border-color: #1e293b;
+  --wave-color: rgba(59, 130, 246, 0.12);
+}
+
+* { 
+  box-sizing: border-box; 
+  transition: background-color 0.25s, color 0.25s, border-color 0.25s; 
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+.container { 
+  max-width: 1100px; 
+  margin: 0 auto; 
+  padding: 0 1.5rem; 
+}
+
+/* --- NAGŁÓWEK I NAWIGACJA --- */
+header {
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--text-main);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.logo span { 
+  color: var(--primary); 
+  font-family: 'Fira Code', monospace; 
+}
+
+.nav-links { 
+  display: flex; 
+  align-items: center; 
+  gap: 0.1rem;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 0.25rem 0.3rem;
+  border-radius: 12px;
+}
+
+.nav-links a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.35rem 0.55rem;
+  border-radius: 8px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--primary);
+  background: var(--card-bg);
+}
+
+.theme-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: 0.25rem;
+}
+
+/* --- KARTY I SIATKI --- */
+.grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+  gap: 1.5rem; 
+  margin: 2rem 0; 
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.card h3 { margin-top: 0; color: var(--text-main); }
+.card p { color: var(--text-muted); flex-grow: 1; font-size: 0.95rem; }
+.card-meta { font-size: 0.8rem; color: var(--text-muted); font-family: 'Fira Code', monospace; margin-bottom: 0.5rem; }
+
+/* --- PRZYCISKI --- */
+.btn {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff !important;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  text-align: center;
+}
+
+.btn:hover { background: var(--primary-hover); }
+
+/* --- GALERIA KAFELKOWA (FACEBOOK STYLE) --- */
+.fb-gallery-container {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--border-color);
+}
+
+.fb-gallery-container h3 {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  color: var(--text-main);
+}
+
+.fb-grid {
+  display: grid;
+  gap: 6px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.fb-grid-item {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+
+.fb-grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.fb-grid-item:hover img {
+  transform: scale(1.03);
+}
+
+.fb-grid.count-1 { grid-template-columns: 1fr; max-height: 450px; }
+.fb-grid.count-1 .fb-grid-item { aspect-ratio: 16/9; }
+.fb-grid.count-2 { grid-template-columns: 1fr 1fr; height: 320px; }
+.fb-grid.count-3 { grid-template-columns: 2fr 1fr; grid-template-rows: 1fr 1fr; height: 380px; }
+.fb-grid.count-3 .fb-grid-item:nth-child(1) { grid-row: span 2; }
+.fb-grid.count-4, .fb-grid.count-more { grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 1fr 1fr; height: 400px; }
+.fb-grid.count-4 .fb-grid-item:nth-child(1), .fb-grid.count-more .fb-grid-item:nth-child(1) { grid-row: span 2; }
+
+/* --- STOPKA I MEDIA SPOŁECZNOŚCIOWE --- */
+footer {
+  border-top: 1px solid var(--border-color);
+  padding: 2.5rem 0;
+  margin-top: 4rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  transition: color 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.social-btn:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.social-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* --- KARUZELA / ALBUM DOWOLNYCH PROPORCJI I GESTÓW --- */
+.album-carousel {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  margin-bottom: 1.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  user-select: none; /* Zapobiega zaznaczaniu tekstu/obraza podczas przeciągania */
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* WARSTWA 1: Rozmyte tło */
+.slide-bg {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+  filter: blur(20px) brightness(0.6);
+  transform: scale(1.1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* WARSTWA 2: Główne zdjęcie */
+.slide-img {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  z-index: 2;
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* PRZYCISKI STRZAŁEK (IDALNIE WYŚRODKOWANE W PIONIE) */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* Klucz do idealnego wyśrodkowania w pionie */
+  background: rgba(15, 23, 42, 0.65);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  z-index: 10; /* Gwarancja, że strzałka zawsze leży NA WIERZCHU zdjęcia */
+  transition: background 0.2s, transform 0.2s;
+  backdrop-filter: blur(4px);
+}
+
+.carousel-btn:hover {
+  background: var(--primary);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.carousel-btn.prev { left: 12px; }
+.carousel-btn.next { right: 12px; }
+
+/* LICZNIK CYFROWY (np. 1 / 5) */
+.carousel-counter {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(15, 23, 42, 0.7);
+  color: #ffffff;
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: 'Fira Code', monospace;
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+}
+
+/* KROPECZKI WSKAŹNIKA W LEWYM/DOLNYM ROGU */
+.carousel-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 10;
+  background: rgba(15, 23, 42, 0.5);
+  padding: 5px 10px;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: background 0.25s, transform 0.25s;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: #ffffff;
+  transform: scale(1.3);
+}
+
+@media (max-width: 600px) {
+  .album-carousel { height: 340px; }
+  .carousel-btn { width: 36px; height: 36px; font-size: 1rem; }
+}
+
+/* Przycisk przejścia do albumu zewnętrznego */
+.album-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.album-link-btn:hover {
+  background: var(--wave-color);
+  border-color: var(--primary);
+}
+
+/* --- RWD (TELEFONY I TABLETY) --- */
+@media (max-width: 768px) {
+  .container { padding: 0 1rem; }
+  .nav-wrapper { height: auto; padding: 0.75rem 1rem; flex-direction: column; gap: 0.75rem; }
+  .logo-img { width: 38px; height: 38px; }
+  .nav-links { 
+    width: auto;             /* Wyłącza rozciąganie na 100% szerokości */
+    max-width: 100%;
+    justify-content: center; 
+    flex-wrap: nowrap;       /* BLOKADA 2 RZĘDÓW - wszystko zostaje w jednym rzędzie */
+    padding: 0.2rem 0.3rem;
+    gap: 0.05rem;            /* Minimalny odstęp między przyciskami */
+  }
+  .nav-links a { 
+    font-size: 0.75rem;      /* Lekko zmniejszona czcionka, by wszystko się zmieściło */
+    padding: 0.3rem 0.45rem; /* Zmniejszone marginesy wewnętrzne przycisków */
+    white-space: nowrap;     /* Zapobiega łamaniu tekstu wewnątrz przycisku */
+  }
+  .theme-btn { padding: 0.3rem 0.45rem; font-size: 0.8rem; }
+  .logo { font-size: 1.1rem; }
+  .grid { grid-template-columns: 1fr; }
+  h1 { font-size: 1.6rem !important; }
+  h2 { font-size: 1.3rem !important; }
+}
+
+@media (max-width: 600px) {
+  .fb-grid.count-2, .fb-grid.count-3, .fb-grid.count-4, .fb-grid.count-more { height: 280px; }
+
+  .album-carousel { height: 340px; }
+  .carousel-btn { width: 36px; height: 36px; font-size: 1rem; }
+}

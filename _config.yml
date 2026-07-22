@@ -1,0 +1,39 @@
+title: "SP9K... | Klub Krótkofalarski I LO w Gorlicach"
+description: "Szkolny Klub Krótkofalarski przy I Liceum Ogólnokształcącym im. M. Kromera w Gorlicach. Połącz się z nami!"
+baseurl: "/klub-test"
+url: "https://emkamil.github.io/klub-test" # Zmień na swój adres GitHub Pages
+
+permalink: /blog/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+markdown: kramdown
+highlighter: rouge
+
+collections:
+  edukacja:
+    output: true
+    permalink: /edukacja/:path/
+  portfolio:
+    output: true
+    permalink: /portfolio/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "edukacja"
+    values:
+      layout: "edukacja_page"
+  - scope:
+      path: ""
+      type: "portfolio"
+    values:
+      layout: "portfolio_page"

@@ -1,0 +1,163 @@
+---
+layout: default
+---
+<article style="max-width: 800px; margin: 0 auto; padding: 1rem 0;">
+  <p style="color: var(--text-muted); font-family: 'Fira Code', monospace;">
+    <a href="{{ '/' | relative_url }}" style="color: var(--primary); text-decoration: none;">&larr; Powrót do aktualności</a>
+  </p>
+  
+  <h1 style="font-size: 2.2rem; margin-bottom: 0.5rem;">{{ page.title }}</h1>
+  
+  <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+    Data: {{ page.date | date: "%d.%m.%Y" }} | Autor: {{ page.author | default: "Klub Krótkofalarski" }}
+  </div>
+
+  <!-- SEKCJA ALBUMU / KARUZELI ZE STRZAŁKAMI I INTELIGENTNYM WSKAŹNIKIEM -->
+  {% if page.gallery and page.gallery.size > 0 %}
+    <div class="album-carousel">
+      <!-- Licznik w rogu (np. 1 / 25) - idealny przy dużej ilości zdjęć -->
+      {% if page.gallery.size > 1 %}
+        <div class="carousel-counter" id="carouselCounter">1 / {{ page.gallery.size }}</div>
+      {% endif %}
+
+      <div class="carousel-track" id="carouselTrack">
+        {% for photo in page.gallery %}
+          {% assign photo_url = photo.src | default: photo %}
+          <div class="carousel-slide">
+            <img src="{{ photo_url | relative_url }}" alt="" class="slide-bg" aria-hidden="true">
+            <img src="{{ photo_url | relative_url }}" alt="Zdjęcie z wpisu" class="slide-img">
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if page.gallery.size > 1 %}
+        <!-- Strzałki nawigacyjne -->
+        <button class="carousel-btn prev" onclick="moveSlide(-1)">&larr;</button>
+        <button class="carousel-btn next" onclick="moveSlide(1)">&rarr;</button>
+
+        <!-- Kropki wyświetlają się TYLKO wtedy, gdy zdjęć jest 8 lub mniej -->
+        {% if page.gallery.size <= 8 %}
+          <div class="carousel-dots" id="carouselDots">
+            {% for photo in page.gallery %}
+              <span class="dot {% if forloop.first %}active{% endif %}" onclick="goToSlide({{ forloop.index0 }})"></span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+  {% elsif page.image %}
+    <!-- Jeśli brak galerii, wyświetl tylko zdjęcie główne -->
+    <div style="margin-bottom: 2rem;">
+      <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" style="width: 100%; max-height: 420px; object-fit: cover; border-radius: 12px; border: 1px solid var(--border-color);">
+    </div>
+  {% endif %}
+
+  <!-- PRZYCISK LINKUJĄCY DO PEŁNEGO ALBUMU ZEWNĘTRZNEGO -->
+  {% if page.album_url and page.album_url != "" %}
+    <div style="text-align: center; margin: 1.5rem 0;">
+      <a href="{{ page.album_url }}" target="_blank" rel="noopener" class="album-link-btn">
+        📁 Zobacz pełny album na Facebooku &rarr;
+      </a>
+    </div>
+  {% endif %}
+
+  <hr style="border: 0; border-top: 1px solid var(--border-color); margin-bottom: 2rem;">
+  
+  <!-- Treść Główna Posta -->
+  <div class="content" style="font-size: 1.05rem; line-height: 1.8;">
+    {{ content }}
+  </div>
+</article>
+
+<script>
+  let currentIndex = 0;
+
+  function updateCarouselUI() {
+    const track = document.getElementById('carouselTrack');
+    const counter = document.getElementById('carouselCounter');
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.querySelector('.carousel-btn.prev');
+    const nextBtn = document.querySelector('.carousel-btn.next');
+    
+    if (!track) return;
+
+    const totalSlides = track.children.length;
+
+    // Przesunięcie slajdera
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    // Aktualizacja licznika (np. 1 / 5)
+    if (counter) {
+      counter.innerText = `${currentIndex + 1} / ${totalSlides}`;
+    }
+
+    // Aktualizacja aktywnej kropki
+    dots.forEach((dot, index) => {
+      if (index === currentIndex) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+
+    // Subtelne ukrycie/przyciemnienie strzałek na brzegach galerii
+    if (prevBtn) {
+      prevBtn.style.opacity = (currentIndex === 0) ? '0.3' : '1';
+      prevBtn.style.cursor = (currentIndex === 0) ? 'default' : 'pointer';
+    }
+    if (nextBtn) {
+      nextBtn.style.opacity = (currentIndex === totalSlides - 1) ? '0.3' : '1';
+      nextBtn.style.cursor = (currentIndex === totalSlides - 1) ? 'default' : 'pointer';
+    }
+  }
+
+  function moveSlide(direction) {
+    const track = document.getElementById('carouselTrack');
+    if (!track) return;
+    const totalSlides = track.children.length;
+
+    // BLOKADA PĘTLI:
+    // Jeśli jesteśmy na pierwszym (0) i chcemy cofnąć (-1) -> nie rób nic
+    if (currentIndex === 0 && direction === -1) return;
+    // Jeśli jesteśmy na ostatnim i chcemy iść w prawo (+1) -> nie rób nic
+    if (currentIndex === totalSlides - 1 && direction === 1) return;
+
+    currentIndex += direction;
+    updateCarouselUI();
+  }
+
+  function goToSlide(index) {
+    currentIndex = index;
+    updateCarouselUI();
+  }
+
+  // Gesty dotykowe (Swipe na telefonach) z blokadą pętli
+  document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.querySelector('.album-carousel');
+    if (!carousel) return;
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const minSwipeDistance = 40;
+
+    carousel.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const swipeDistance = touchEndX - touchStartX;
+
+      if (Math.abs(swipeDistance) > minSwipeDistance) {
+        if (swipeDistance < 0) {
+          moveSlide(1);  // Następne
+        } else {
+          moveSlide(-1); // Poprzednie
+        }
+      }
+    }, { passive: true });
+
+    // Inicjalizacja stanu początkowego przycisków
+    updateCarouselUI();
+  });
+</script>

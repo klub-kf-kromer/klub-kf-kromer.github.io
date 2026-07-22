@@ -1,0 +1,26 @@
+---
+layout: default
+title: Strona Główna
+---
+
+<div style="background: var(--wave-color); padding: 3rem 2rem; border-radius: 16px; border: 1px solid var(--border-color); margin-bottom: 3rem; text-align: center;">
+  <span style="font-family: 'Fira Code', monospace; color: var(--primary); font-weight: 600;">--.-- --- .-. .-.. .. -.-. .</span>
+  <h1 style="font-size: 2.5rem; margin: 0.5rem 0 1rem 0;">Szkolny Klub Krótkofalarski w Gorlicach</h1>
+  <p style="max-width: 650px; margin: 0 auto 1.5rem auto; color: var(--text-muted); font-size: 1.1rem;">
+    Czym jest krótkofalarstwo? To łączność z całym światem za pomocą własnych radiostacji, budowanie elektroniki, łapanie sygnałów z kosmosu i eksperymentowanie z falami radiowymi.
+  </p>
+  <a href="{{ '/edukacja/' | relative_url }}" class="btn">Rozpocznij przygodę z radiem &rarr;</a>
+</div>
+
+<h2>Ostatnie Działania i Wpisy</h2>
+
+<div class="grid">
+  {% for post in site.posts limit:6 %}
+  <div class="card">
+    <div class="card-meta">{{ post.date | date: "%d.%m.%Y" }} | {{ post.author | default: "Klub" }}</div>
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+    <a href="{{ post.url | relative_url }}" style="color: var(--primary); font-weight: 600; text-decoration: none;">Czytaj więcej &rarr;</a>
+  </div>
+  {% endfor %}
+</div>

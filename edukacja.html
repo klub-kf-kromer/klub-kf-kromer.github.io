@@ -1,0 +1,18 @@
+---
+layout: default
+title: Materiały Edukacyjne
+---
+
+<h1>Materiały Edukacyjne i Baza Wiedzy</h1>
+<p style="color: var(--text-muted);">Przygotowujesz się do egzaminu na licencję krótkofalarską, czy chcesz po prostu zrozumieć jak działa radio? Zostawiliśmy tu komplet materiałów.</p>
+
+<div class="grid">
+  {% for mat in site.edukacja %}
+  <div class="card">
+    <div class="card-meta">Poziom: {{ mat.level }} | Kategoria: {{ mat.category }}</div>
+    <h3>{{ mat.title }}</h3>
+    <p>{{ mat.summary }}</p>
+    <a href="{{ mat.url | relative_url }}" class="btn" style="margin-top: 1rem;">Otwórz Lekcję</a>
+  </div>
+  {% endfor %}
+</div>
