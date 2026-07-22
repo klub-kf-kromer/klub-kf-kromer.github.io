@@ -12,8 +12,12 @@
   <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}Klub Krótkofalarski przy I LO im. M. Kromera w Gorlicach{% endif %}">
   <meta property="og:description" content="{{ page.hero_subtitle | default: page.summary | default: 'Klub Krótkofalarski przy I LO im. M. Kromera w Gorlicach. Łączność ze światem, budowa elektroniki i eksperymenty z falami radiowymi.' }}">
   <!-- Logo / Zdjęcie podglądu na Messengerze -->
-  <meta property="og:image" content="{{'/logo_klubu.png' | absolute_url }}">
-  <meta property="og:image:secure_url" content="{{ '/logo_klubu.png' | absolute_url }}">
+  <meta property="og:image" content="{{ '/logo_klubu.png?v=2' | absolute_url }}">
+  <meta property="og:image:secure_url" content="{{ '/logo_klubu.png?v=2' | absolute_url }}">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
+  <meta property="og:image:alt" content="Logo Klubu Krótkofalarskiego">
     
   
   <link rel="icon" type="image/png" href="{{ '/logo_klubu.png' | relative_url }}">
