@@ -6,6 +6,17 @@
   <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 }}">
 
+  <!-- Open Graph / Facebook / Messenger -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ page.url | replace:'index.html','' | absolute_url }}">
+  <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}Klub Krótkofalarski przy I LO im. M. Kromera w Gorlicach{% endif %}">
+  <meta property="og:description" content="{{ page.hero_subtitle | default: page.summary | default: 'Klub Krótkofalarski przy I LO im. M. Kromera w Gorlicach. Łączność ze światem, budowa elektroniki i eksperymenty z falami radiowymi.' }}">
+  <!-- Logo / Zdjęcie podglądu na Messengerze -->
+  <meta property="og:image" content="{{'/assets/images/logo.png' | absolute_url }}">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+    
+  
   <link rel="icon" type="image/png" href="{{ '/logo_klubu.png' | relative_url }}">
   <link rel="apple-touch-icon" href="{{ '/logo_klubu.png' | relative_url }}">
   
