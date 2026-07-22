@@ -113,10 +113,9 @@ content:
         label: "Opis szczegółowy"
         type: rich-text
 
-- name: pages
+  - name: pages
     label: "Strony statyczne"
-    type: collection
-    path: /
+    type: file
     files:
       - name: home
         label: "Strona Główna"
