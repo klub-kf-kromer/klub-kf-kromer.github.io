@@ -1,7 +1,7 @@
 title: "SP9... | Klub Krótkofalarski przy I LO w Gorlicach"
 description: "Klub Krótkofalarski przy I LO im. M. Kromera w Gorlicach."
 baseurl: ""
-url: "https://klub-kf-kromer.github.io" # Zmień na swój adres GitHub Pages
+url: "https://klub-kf-kromer.github.io"
 
 permalink: /blog/:title/
 
