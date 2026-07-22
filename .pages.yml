@@ -1,0 +1,114 @@
+media:
+  input: assets/images
+  output: /assets/images
+
+content:
+  - name: posts
+    label: "Aktualności"
+    type: collection
+    path: _posts
+    filename: "{year}-{month}-{day}-{slug}.md"
+    view:
+      fields: [title, date, author]
+      primary: title
+    fields:
+      - name: layout
+        label: "Szablon"
+        type: string
+        default: "post"
+        hidden: true
+      - name: title
+        label: "Tytuł wpisu"
+        type: string
+        required: true
+      - name: date
+        label: "Data i godzina"
+        type: datetime
+        required: true
+      - name: author
+        label: "Autor / Znak"
+        type: string
+        default: "Klub Krótkofalarski"
+      - name: image
+        label: "Zdjęcie wyróżniające (Okładka)"
+        type: image
+      - name: gallery
+        label: Gallery
+        type: image
+        options:
+          multiple:
+            max: 30
+          unique: true
+          extensions: [jpg, png, webp]
+          rename: true
+      - name: album_url
+        label: "Link do pełnego albumu zewnętrznego (np. Facebook)"
+        type: string
+      - name: body
+        label: "Treść wpisu"
+        type: rich-text
+
+  - name: edukacja
+    label: "Edukacja"
+    type: collection
+    path: _edukacja
+    filename: "{slug}.md"
+    view:
+      fields: [title, category, level]
+      primary: title
+    fields:
+      - name: layout
+        label: "Szablon"
+        type: string
+        default: "edukacja_page"
+        hidden: true
+      - name: title
+        label: "Tytuł materiału"
+        type: string
+        required: true
+      - name: category
+        label: "Kategoria"
+        type: select
+        options: ["Teoria", "Praktyka", "BHP i Przepisy", "Egzamin"]
+      - name: level
+        label: "Poziom"
+        type: select
+        options: ["Początkujący", "Średniozaawansowany", "Zaawansowany"]
+      - name: summary
+        label: "Opis zwięzły"
+        type: string
+      - name: body
+        label: "Treść lekcji"
+        type: rich-text
+
+  - name: portfolio
+    label: "O nas i portfolio"
+    type: collection
+    path: _portfolio
+    filename: "{slug}.md"
+    view:
+      fields: [title, category]
+      primary: title
+    fields:
+      - name: layout
+        label: "Szablon"
+        type: string
+        default: "portfolio_page"
+        hidden: true
+      - name: title
+        label: "Tytuł projektu / Oś osi czasu"
+        type: string
+        required: true
+      - name: category
+        label: "Kategoria"
+        type: select
+        options: ["O nas", "Projekt techniczny", "Zawody i Dyplomy", "Sprzęt i Anteny"]
+      - name: summary
+        label: "Krótki opis"
+        type: string
+      - name: image
+        label: "Zdjęcie główne"
+        type: image
+      - name: body
+        label: "Opis szczegółowy"
+        type: rich-text
